@@ -1,6 +1,6 @@
 __author__ = "Jag_k"
 from urllib import request, parse
-from translateApiKey import apiKey  # https://translate.yandex.ru/developers/keys
+
 
 # print("Jk's Lib start loading...")
 
@@ -28,6 +28,11 @@ class File:
 
 
 # Translate #
+
+def edit_translate_api_key(key):
+    trns = open('translateApiKey.py', 'w+', encoding='utf-8')
+    trns.write("apiKey = '{}'".format(key))
+    trns.close()
 
 
 def en(text):
@@ -108,4 +113,8 @@ def installer(List, dir='', start=None):
 
 # print("Jk's Lib loaded")
 if __name__ == '__main__':
-    pass
+    try:
+        from translateApiKey import apiKey  # https://translate.yandex.ru/developers/keys
+    except ImportError:
+        edit_translate_api_key(input('Input the api-key for Translate (https://translate.yandex.ru/developers/keys): '))
+        from translateApiKey import apiKey
